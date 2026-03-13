@@ -1,78 +1,139 @@
 #include "raylib.h"
-#include "rlgl.h"
-#include <math.h>
+#include "raymath.h"
 #include <vector>
 
-struct GamePart {
-    Vector3 pos;
-    Vector3 offset;
-    bool installed;
-    Color color;
-    bool isHeld;
-    const char* name;
-};
+struct Part { Vector3 pos; Vector3 snapPos; bool installed; Color color; bool isSphere; };
 
-void DrawBabettaFrame(Vector3 pos) {
-    DrawCube((Vector3){ pos.x, pos.y + 0.6f, pos.z }, 0.1f, 0.1f, 1.2f, LIGHTGRAY); // Main tube
-    DrawCube((Vector3){ pos.x, pos.y + 0.8f, pos.z - 0.4f }, 0.1f, 0.4f, 0.1f, LIGHTGRAY); // Seat post
-    DrawCube((Vector3){ pos.x, pos.y + 1.0f, pos.z - 0.6f }, 0.3f, 0.05f, 0.5f, RED); // Rear rack
-    DrawLine3D((Vector3){ pos.x, pos.y + 0.6f, pos.z + 0.6f }, (Vector3){ pos.x, pos.y + 1.1f, pos.z + 0.6f }, GRAY); // Forks
+
+bool IsPlayerColliding(Vector3 p, Vector3 gPos) {
+    if (CheckCollisionBoxes((BoundingBox){{p.x-0.5f,0,p.z-0.5f},{p.x+0.5f,2,p.z+0.5f}}, 
+        (BoundingBox){{gPos.x-7.5f, 0, gPos.z-7.7f}, {gPos.x+7.5f, 5, gPos.z-7.3f}})) return true;
+    if (CheckCollisionBoxes((BoundingBox){{p.x-0.5f,0,p.z-0.5f},{p.x+0.5f,2,p.z+0.5f}}, 
+        (BoundingBox){{gPos.x-7.7f, 0, gPos.z-7.5f}, {gPos.x-7.3f, 5, gPos.z+7.5f}})) return true;
+    if (CheckCollisionBoxes((BoundingBox){{p.x-0.5f,0,p.z-0.5f},{p.x+0.5f,2,p.z+0.5f}}, 
+        (BoundingBox){{gPos.x+7.3f, 0, gPos.z-7.5f}, {gPos.x+7.7f, 5, gPos.z+7.5f}})) return true;
+    return false;
 }
 
-void DrawTexturedCube(Texture2D texture, Vector3 position, float width, float height, float length, Color color) {
-    float x = position.x, y = position.y, z = position.z;
-    rlSetTexture(texture.id);
-    rlBegin(RL_QUADS);
-    rlColor4ub(color.r, color.g, color.b, color.a);
-    // Face drawing logic here (shortened for brevity, use previous full version for all sides)
-    rlNormal3f(0.0f, 1.0f, 0.0f);
-    rlTexCoord2f(0.0f, 1.0f); rlVertex3f(x - width/2, y + height/2, z - length/2);
-    rlTexCoord2f(0.0f, 0.0f); rlVertex3f(x - width/2, y + height/2, z + length/2);
-    rlTexCoord2f(1.0f, 0.0f); rlVertex3f(x + width/2, y + height/2, z + length/2);
-    rlTexCoord2f(1.0f, 1.0f); rlVertex3f(x + width/2, y + height/2, z - length/2);
-    rlEnd();
-    rlSetTexture(0);
+void DrawFullGarage(Vector3 pos) {
+    DrawCube({pos.x, pos.y + 2.5f, pos.z - 7.5f}, 15, 5, 0.2f, BEIGE);  
+    DrawCube({pos.x - 7.5f, pos.y + 2.5f, pos.z}, 0.2f, 5, 15, BEIGE); 
+    DrawCube({pos.x + 7.5f, pos.y + 2.5f, pos.z}, 0.2f, 5, 15, BEIGE); 
+    DrawCube({pos.x, pos.y + 5.0f, pos.z}, 15, 0.2f, 15, GRAY);        
+    DrawCube({pos.x - 7.0f, pos.y + 1.5f, pos.z}, 1, 0.1f, 10, BROWN); 
+}
+
+void DrawStore(Vector3 pos) {
+    DrawCube({pos.x, pos.y + 2.5f, pos.z - 7.5f}, 15, 5, 0.2f, BEIGE);  
+    DrawCube({pos.x - 7.5f, pos.y + 2.5f, pos.z}, 0.2f, 5, 15, BEIGE); 
+    DrawCube({pos.x + 7.5f, pos.y + 2.5f, pos.z}, 0.2f, 5, 15, BEIGE); 
+    DrawCube({pos.x, pos.y + 5.0f, pos.z}, 15, 0.2f, 15, GRAY);        
+    DrawCube({pos.x - 7.0f, pos.y + 1.5f, pos.z}, 1, 0.1f, 10, BROWN); 
 }
 
 int main() {
-    InitWindow(1280, 720, "My Summer Babetta - Building");
-    SetExitKey(KEY_NULL);
-    Texture2D wallTex = LoadTexture("Textures/wallbuild1.png");
-    Texture2D floorTex = LoadTexture("Textures/background1.png.jpeg");
-    Camera3D camera = { { 5.0f, 2.0f, 5.0f }, { 0.0f, 1.0f, 0.0f }, { 0.0f, 1.0f, 0.0f }, 75.0f, CAMERA_PERSPECTIVE };
+    InitWindow(1280, 720, "My Summer Babetta - Version: 0.4.1A");
+    SetExitKey(0); 
 
-    std::vector<GamePart> parts = {
-        {{ -2.0f, 0.1f, -2.0f }, { 0.0f, 0.4f, 0.0f }, false, GRAY, false, "Engine"},
-        {{ -2.5f, 0.1f, -1.0f }, { 0.0f, 0.4f, 0.6f }, false, DARKGRAY, false, "Front Wheel"},
-        {{ -2.5f, 0.1f, -1.5f }, { 0.0f, 0.4f, -0.6f }, false, DARKGRAY, false, "Rear Wheel"}
+    Camera3D camera = { { 20.0f, 1.8f, 25.0f }, { 20.0f, 1.8f, 20.0f }, { 0.0f, 1.0f, 0.0f }, 75.0f, CAMERA_PERSPECTIVE };
+    
+    std::vector<Part> parts = {
+        {{ 16.0f, 0.5f, 16.0f }, { 0.0f, 0.5f, 0.0f }, false, GRAY, false}, 
+        {{ 16.0f, 0.5f, 17.0f }, { 0.0f, 0.4f, 0.7f }, false, BLACK, true}, 
+        {{ 16.0f, 0.5f, 18.0f }, { 0.0f, 0.4f, -0.7f }, false, BLACK, true} 
     };
 
+    float money = 2500.0f, hunger = 0.0f, thirst = 0.0f, fuel = 5.0f;
+    int holdingIdx = -1;
+    bool isRiding = false, isPaused = false, showFPS = true;
+    Vector3 babettaPos = {20, 0, 20};
+    float babettaRot = 0.0f, speed = 0.0f;
+
     DisableCursor();
+    SetTargetFPS(120);
+
     while (!WindowShouldClose()) {
-        if (!IsKeyDown(KEY_ESCAPE)) {
-            UpdateCameraPro(&camera, {(IsKeyDown(KEY_W)-IsKeyDown(KEY_S))*0.1f, (IsKeyDown(KEY_D)-IsKeyDown(KEY_A))*0.1f, 0}, {GetMouseDelta().x*0.1f, GetMouseDelta().y*0.1f, 0}, 0);
-            camera.position.y = 1.8f;
-        }
-        
-        // Interaction logic
-        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-            for (auto &p : parts) {
-                if (p.isHeld) { p.isHeld = false; break; }
-                if (CheckCollisionSpheres(camera.position, 1.5f, p.pos, 0.5f)) { p.isHeld = true; break; }
+        if (IsKeyPressed(KEY_ESCAPE)) { isPaused = !isPaused; if (isPaused) EnableCursor(); else DisableCursor(); }
+        if (IsKeyPressed(KEY_F6)) showFPS = !showFPS;
+        if (IsKeyPressed(KEY_F9)) money = 999999.0f;
+
+        if (!isPaused) {                
+            hunger += 0.00000000000005f; thirst += 0.0005f;
+
+            if (!isRiding) {
+                Vector3 oldPos = camera.position;
+                UpdateCameraPro(&camera, {(IsKeyDown(KEY_W)-IsKeyDown(KEY_S))*0.15f, (IsKeyDown(KEY_D)-IsKeyDown(KEY_A))*0.15f, 0}, {GetMouseDelta().x*0.1f, GetMouseDelta().y*0.1f, 0}, 0);
+                if (IsPlayerColliding(camera.position, {20,0,20})) camera.position = oldPos; 
+                camera.position.y = 1.8f;
+                
+                if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+                    if (holdingIdx == -1) {
+                        for (int i = 0; i < (int)parts.size(); i++) 
+                            if (!parts[i].installed && CheckCollisionSpheres(camera.position, 2.0f, parts[i].pos, 0.6f)) { holdingIdx = i; break; }
+                        
+                        if (holdingIdx == -1 && CheckCollisionSpheres(camera.position, 1.5f, babettaPos, 1.0f)) {
+                            for (auto& p : parts) if (p.installed) { p.installed = false; p.pos = Vector3Add(camera.position, {1,0,0}); break; }
+                        }
+                    } else holdingIdx = -1;
+                }
+
+                if (holdingIdx != -1) {
+                    parts[holdingIdx].pos = Vector3Add(camera.position, Vector3Scale(Vector3Normalize(Vector3Subtract(camera.target, camera.position)), 1.5f));
+                    if (CheckCollisionSpheres(parts[holdingIdx].pos, 0.6f, babettaPos, 1.0f)) { parts[holdingIdx].installed = true; holdingIdx = -1; }
+                }
+
+                bool ready = true; for(auto& p : parts) if(!p.installed) ready = false;
+                if (ready && IsKeyPressed(KEY_E)) isRiding = true; 
+            } else {
+                bool ready = true; for(auto& p : parts) if(!p.installed) ready = false;
+
+                if (ready && IsKeyDown(KEY_W) && fuel > 0) { speed += 0.003f; fuel -= 0.0001f; } else speed *= 0.98f;
+                if (IsKeyDown(KEY_A)) babettaRot += 3.0f; if (IsKeyDown(KEY_D)) babettaRot -= 3.0f;
+                
+                babettaPos.x += sinf(babettaRot * DEG2RAD) * speed;
+                babettaPos.z += cosf(babettaRot * DEG2RAD) * speed;
+                camera.position = Vector3Add(babettaPos, (Vector3){-sinf(babettaRot * DEG2RAD)*5, 2.5f, -cosf(babettaRot * DEG2RAD)*5});
+                camera.target = babettaPos;
+                if (IsKeyPressed(KEY_E)) isRiding = false;
             }
         }
 
         BeginDrawing();
             ClearBackground(SKYBLUE);
             BeginMode3D(camera);
-                DrawTexturedCube(floorTex, {0,-0.1f,0}, 20, 0.1f, 20, WHITE);
-                DrawBabettaFrame({0,0,0});
-                for (auto &p : parts) {
-                    if (p.isHeld) p.pos = (Vector3){camera.position.x + (camera.target.x - camera.position.x)*0.7f, camera.position.y - 0.3f, camera.position.z + (camera.target.z - camera.position.z)*0.7f};
-                    DrawCube(p.pos, 0.3f, 0.3f, 0.3f, p.color);
+                DrawPlane({0, 0, 0}, {4000, 4000}, DARKGREEN);
+                DrawCube({0, 0.01f, 0}, 12, 0.02f, 2000, GRAY);
+                DrawFullGarage({20, 0, 20});
+                
+                DrawCube({-50, 3, 100}, 20, 6, 20, ORANGE); 
+                DrawCube({50, 3, 100}, 20, 6, 20, BLUE);   
+                DrawCube({120, 3, 150}, 20, 6, 20, YELLOW); 
+                DrawCube({-120, 2, 200}, 10, 5, 10, RED);   
+
+                DrawCube(babettaPos, 0.2f, 0.1f, 1.5f, RED); 
+                for (auto& p : parts) {
+                    Vector3 dPos = p.installed ? Vector3Add(babettaPos, Vector3RotateByQuaternion(p.snapPos, QuaternionFromEuler(0, babettaRot * DEG2RAD, 0))) : p.pos;
+                    if (p.isSphere) DrawSphere(dPos, 0.35f, p.color); else DrawCube(dPos, 0.4f, 0.4f, 0.4f, p.color);
                 }
             EndMode3D();
-            DrawCircle(640, 360, 2, WHITE);
+
+            if (showFPS) DrawFPS(10, 10);
+            DrawText(TextFormat("Peniaze: %.0f EUR", money), 10, 40, 20, GREEN);
+            DrawText(TextFormat("Hlad: %.1f%%", hunger*100), 10, 70, 20, ORANGE);
+            
+            if (isRiding) {
+                DrawText(TextFormat("Rychlost: %i KM/H", (int)(speed*100)), 1000, 650, 20, RED);
+                DrawText(TextFormat("Palivo: %.1f L", fuel), 1000, 680, 20, YELLOW);
+            } else {
+                DrawText("E - Karovat Babettu (Potrebujes: Motor + 2 Kolesa)", 450, 680, 20, WHITE);
+            }
+
+            if (isPaused) {
+                DrawRectangle(0, 0, 1280, 720, Fade(BLACK, 0.7f));
+                DrawText("PAUZA", 580, 320, 40, WHITE);
+                DrawText("By LOM_Noob and Jurmat.", 580, 500, 40, WHITE);
+                DrawText("Version: 0.4.1A", 580, 100, 40, RED);
+            }
         EndDrawing();
     }
     CloseWindow();
