@@ -2,7 +2,11 @@
 A rural Slovak simulator built with C++ and Raylib. Build, maintain, and ride your legendary Babetta through a village while managing your survival and money.
 
 [!CAUTION]
-COPYRIGHT NOTICE: This project is built by LOM_Noob and Jurmat. Do not republish this code on GitHub or any other platform.
+COPYRIGHT NOTICE: This project is built by LOM_Noob and Jurmat also with Katka Cista. Do not republish this code on GitHub or any other platform.
+🛑🛑🛑🛑
+🛑MODLOADER ADDED, Mods are in Mods (TESTING) Folder, to make a Mod for it, please read the txt HLAVNE_PRECITAT_PRE_DAVANIE_MODOV.txt (Its in slovak, english will be released soon)
+🛑PLEASE READ THE PRECITAJMA.txt (Its in slovak, english will be released soon)
+🛑🛑🛑🛑
 
 🛠 Features
 Modular Assembly System: The Babetta is not just a vehicle; it's a project. It will not move unless you have manually installed:
@@ -17,7 +21,7 @@ Detailed World: The Garage: 4-wall structure with shelves for part storage.
 
 Solid Collisions: Buildings are physical objects. You can walk into the garage, but you can't walk through walls.
 
-Survival Mechanics: Real-time Hunger and Thirst tracking. (WIP)
+Survival Mechanics: Real-time Hunger and Thirst tracking. (WIP) still btro
 
 Economic System: Start with 2000 EUR.
 
@@ -32,7 +36,10 @@ E	Mount or Dismount Babetta
 ESC	Toggle Pause Menu / Show Cursor
 F6	Toggle FPS Counter
 F9	Cheat: Instant 999,999 EUR
-
+🛑🛑🛑🛑
+APR/17/2026
+THIS IS NEW: F12 SCREENSHOT!!! idk about that but yea - LOM_Noob
+🛑🛑🛑🛑
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 🏗 Technical Details
@@ -62,6 +69,8 @@ Click End Task and try compiling again.
 LOM_Noob - Lead Developer / Logic / Programming / no fucking ai.
 
 Jurmat - Co-Developer / Optimization / Textures / Actually a founder of the Idea lol -LOM_Noob
+
+Katka Cista - Ideas for Launcher and Game and Helper, (Its a girl) - LOM_Noob
 
 
 
