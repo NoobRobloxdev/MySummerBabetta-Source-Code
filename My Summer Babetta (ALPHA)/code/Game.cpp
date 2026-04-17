@@ -71,7 +71,7 @@ void DrawFullGarage(Vector3 pos) {
 }
 
 int main() {
-    InitWindow(1280, 720, "My Summer Babetta - Version: 0.4.5A  || ModLoader Version: 0.1.3A");
+    InitWindow(1280, 720, "My Summer Babetta - Version: 0.4.5A  || ModLoader Version: 0.1.5A");
     
     InitAudioDevice();
     Music ambient = { 0 }; 
@@ -201,7 +201,7 @@ int main() {
             if (isPaused) {
                 DrawRectangle(0, 0, 1280, 720, Fade(BLACK, 0.7f));
                 DrawText("PAUZA", 580, 320, 40, WHITE);
-                DrawText("Version: 0.4.5A || ModLoader: 0.1.3A", 530, 100, 30, RED);
+                DrawText("Version: 0.4.5A || ModLoader: 0.1.5A", 530, 100, 30, RED);
             }
         EndDrawing();
     }

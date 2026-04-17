@@ -83,17 +83,17 @@ int main() {
             if (CheckCollisionPointRec(mousePos, tabCredRec) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) activeTab = 2;
 
             DrawRectangleRec(tabMainRec, activeTab == 0 ? GRAY : BLACK);
-            DrawText("HRA", 25, 12, 20, WHITE);
+            DrawText("HLAVNE", 25, 12, 20, WHITE);
             DrawRectangleRec(tabModsRec, activeTab == 1 ? GRAY : BLACK);
             DrawText("MODY", 155, 12, 20, WHITE);
             DrawRectangleRec(tabCredRec, activeTab == 2 ? GRAY : BLACK);
-            DrawText("CREDITS", 265, 12, 20, WHITE);
+            DrawText("CREDITY", 265, 12, 20, WHITE);
 
       
             if (activeTab == 0) {
                 DrawText("MY SUMMER BABETTA", 50, 80, 40, YELLOW);
                 DrawText("Verzia: 0.4.5A", 50, 130, 20, LIGHTGRAY);
-                DrawText("ModLoader Verzia: 0.1.3A", 50, 150, 20, LIGHTGRAY);
+                DrawText("ModLoader Verzia: 0.1.5A", 50, 150, 20, LIGHTGRAY);
                 DrawText("Programované podla LOM_Noob, Jurmat", 50, 170, 20, GOLD);
                 
                 Rectangle playBtnRec = { 50, 200, 250, 60 };
@@ -108,7 +108,7 @@ int main() {
             else if (activeTab == 1) {
                 DrawText("Najdene mody v priecinku /build/mods:", 50, 70, 22, GREEN);
                 DrawLine(50, 95, 400, 95, GREEN);
-                if (foundMods.empty()) DrawText("Ziadne mody, v MODS (TESTING) su niektore mody", 50, 120, 20, RED);
+                if (foundMods.empty()) DrawText("Ziadne mody, v MODS (TESTING) su niektore mody.", 50, 120, 20, RED);
                 else {
                     for (int i = 0; i < (int)foundMods.size(); i++) 
                         DrawText(TextFormat("- %s", foundMods[i].c_str()), 60, 120 + (i * 30), 20, RAYWHITE);
@@ -118,15 +118,15 @@ int main() {
                 DrawText("AUTORI A PODPORA", 50, 70, 25, GOLD);
                 DrawLine(50, 100, 300, 100, GOLD);
 
-                DrawText("Jurmat", 60, 120, 22, RAYWHITE);
+                DrawText("Jurmat", 60, 120, 22, GOLD);
                 DrawText("Lead Texture Helper- Owner", 60, 145, 16, GRAY);
                 DrawClickableLink("tiktok.com/@jurajkyselica", {60, 162}, 16, SKYBLUE, "https://www.tiktok.com/@jurajkyselica/");
 
-                DrawText("LOM_Noob", 60, 200, 22, RAYWHITE);
+                DrawText("LOM_Noob", 60, 200, 22, YELLOW);
                 DrawText("Lead Programmer,Programmed Every thing, Co-Owner", 60, 225, 16, GRAY);
                 DrawClickableLink("github.com/NoobRobloxdev/", {60, 242}, 16, SKYBLUE, "https://github.com/NoobRobloxdev");
 
-                DrawText("Katka Cista", 60, 280, 22, RAYWHITE);
+                DrawText("Katka Cista", 60, 280, 22, BLUE);
                 DrawText("Ideas for Launcher and Game and Helper, (Its a girl) -LOM_Noob ", 60, 305, 16, GRAY);
                 DrawClickableLink("Link stlac (JK)", {60, 322}, 16, SKYBLUE, "https://youtu.be/-aZ9knDohXw?si=dUk4YF6wgdTqGMyO");
 
