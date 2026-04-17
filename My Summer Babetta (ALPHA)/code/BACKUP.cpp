@@ -4,11 +4,11 @@
 #include <string>
 #include <filesystem>
 #include <iostream>
-#include <fstream>  
+#include <fstream>  // Potrebné na čítanie súborov modov
 
 namespace fs = std::filesystem;
 
-
+// --- GLOBÁLNE PREMENNÉ PRE MODY ---
 float modSpeedMultiplier = 1.0f;
 float modMoneyBonus = 0.0f;
 
@@ -16,7 +16,7 @@ struct Mod {
     std::string name;
 };
 
-
+// Funkcia na načítanie a aktiváciu efektov modov
 std::vector<Mod> LoadAndApplyMods() {
     std::vector<Mod> loadedMods;
     if (!fs::exists("mods")) fs::create_directory("mods");
@@ -24,21 +24,21 @@ std::vector<Mod> LoadAndApplyMods() {
     for (const auto& entry : fs::directory_iterator("mods")) {
         if (entry.is_regular_file()) {
             std::string ext = entry.path().extension().string();
-            if (ext == ".txt" || ext == ".cfg" || ext == ".dll" || ext == ".c") {
+            if (ext == ".txt" || ext == ".cfg") {
                 loadedMods.push_back({entry.path().filename().string()});
 
-                
+                // ČÍTANIE SÚBORU MODU
                 std::ifstream file(entry.path());
                 std::string line;
                 while (std::getline(file, line)) {
-                  
+                    // Ak riadok obsahuje "speed:", načítaj násobiteľ rýchlosti
                     if (line.find("speed:") != std::string::npos) {
                         try {
                             std::string val = line.substr(line.find(":") + 1);
                             modSpeedMultiplier = std::stof(val);
                         } catch (...) {}
                     }
-                   
+                    // Ak riadok obsahuje "money:", pridaj peniaze
                     if (line.find("money:") != std::string::npos) {
                         try {
                             std::string val = line.substr(line.find(":") + 1);
@@ -67,11 +67,11 @@ void DrawFullGarage(Vector3 pos) {
     DrawCube({pos.x - 7.5f, pos.y + 2.5f, pos.z}, 0.2f, 5, 15, BEIGE); 
     DrawCube({pos.x + 7.5f, pos.y + 2.5f, pos.z}, 0.2f, 5, 15, BEIGE); 
     DrawCube({pos.x, pos.y + 5.0f, pos.z}, 15, 0.2f, 15, GRAY);        
-    DrawCube({pos.x - 7.0f, pos.y + 1.5f, pos.z}, 1, 0.1f, 10, BROWN); 
+    DrawCube({pos.x - 7.0f, pos.y + 1.5f, pos.z}, 1, 0.1f, 10, BROWN); // Polička
 }
 
 int main() {
-    InitWindow(1280, 720, "My Summer Babetta - Version: 0.4.5A  || ModLoader Version: 0.1.3A");
+    InitWindow(1280, 720, "My Summer Babetta - Version: 0.4.5A");
     
     InitAudioDevice();
     Music ambient = { 0 }; 
@@ -80,6 +80,7 @@ int main() {
         PlayMusicStream(ambient);
     }
     
+    // Aktivácia modov
     std::vector<Mod> activeMods = LoadAndApplyMods();
     
     bool radioOn = true;
@@ -93,7 +94,7 @@ int main() {
         {{ 16.0f, 0.5f, 18.0f }, { 0.0f, 0.4f, -0.7f }, false, BLACK, true} 
     };
 
-    float money = 2500.0f + modMoneyBonus; 
+    float money = 2500.0f + modMoneyBonus; // Aplikovanie peňazí z modu
     float hunger = 0.0f, thirst = 0.0f, fuel = 5.0f;
     int holdingIdx = -1;
     bool isRiding = false, isPaused = false, showFPS = true;
@@ -149,6 +150,7 @@ int main() {
                 bool ready = true; for(auto& p : parts) if(!p.installed) ready = false;
                 if (ready && IsKeyPressed(KEY_E)) isRiding = true; 
             } else {
+                // TU SA POUŽÍVA MODSPEEDMULTIPLIER
                 if (IsKeyDown(KEY_W) && fuel > 0) { speed += (0.003f * modSpeedMultiplier); fuel -= 0.0001f; } else speed *= 0.98f;
                 if (IsKeyDown(KEY_A)) babettaRot += 2.0f; if (IsKeyDown(KEY_D)) babettaRot -= 2.0f;
                 
@@ -188,10 +190,9 @@ int main() {
             DrawText(TextFormat("Hlad: %.1f%%", hunger*100), 10, 70, 20, ORANGE);
             DrawText(radioOn ? "Radio: ON" : "Radio: OFF", 10, 100, 20, radioOn ? BLUE : RED);
             
-
+            // UI pre mody
             DrawText(TextFormat("MODS LOADED: %i", (int)activeMods.size()), 10, 130, 20, GOLD);
             if(modSpeedMultiplier != 1.0f) DrawText(TextFormat("SPEED BOOST: %.1fx", modSpeedMultiplier), 10, 160, 20, YELLOW);
-
 
             if (isRiding) {
                 DrawText(TextFormat("Rychlost: %i KM/H", (int)(speed*100)), 1000, 650, 20, WHITE);
@@ -201,7 +202,7 @@ int main() {
             if (isPaused) {
                 DrawRectangle(0, 0, 1280, 720, Fade(BLACK, 0.7f));
                 DrawText("PAUZA", 580, 320, 40, WHITE);
-                DrawText("Version: 0.4.5A || ModLoader: 0.1.3A", 530, 100, 30, RED);
+                DrawText("Version: 0.4.5A (Modded)", 530, 100, 30, RED);
             }
         EndDrawing();
     }

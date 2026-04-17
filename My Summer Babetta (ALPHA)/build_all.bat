@@ -1,27 +1,48 @@
 @echo off
-set "PATH=C:\msys64\ucrt64\bin;%PATH%"
+set PATH=%PATH%;C:\msys64\ucrt64\bin;C:\msys64\mingw64\bin;C:\mingw64\bin;C:\MinGW\bin
 
-echo ------------------------------------------
-echo COMPILING "MY SUMMER BABETTA (ALPHA)"
-echo ------------------------------------------
+echo REPAIRING "MY SUMMER BABETTA (ALPHA) BUILDING TOOL"
+echo ---------------------------------------
+echo Killing the procceses for Launcher.exe and Game.exe
+taskkill /F /IM Launcher.exe /T >nul 2>&1
+taskkill /F /IM Game.exe /T >nul 2>&1
+echo ---------------------------------------
 
-echo Compiling Launcher...
-g++ code/main.cpp -o build/Launcher.exe -mwindows -lcomctl32
 
-echo Compiling smth
-g++ code/was.cpp -o build/WAS.exe -lraylib -lopengl32 -lgdi32 -lwinmm -static -static-libgcc -static-libstdc++ 
+if not exist "build" mkdir build
+if not exist "build\mods" mkdir build\mods
 
-echo Compiling Game...
-echo  !! This is builded by LOM_Noob and Jurmat, Do not Republish this code gain in github. (Github: https://github.com/NoobRobloxdev/ )
-g++ code/game.cpp -o build/Game.exe -lraylib -lopengl32 -lgdi32 -lwinmm -static -static-libgcc -static-libstdc++  
+copy /Y "code\*.dll" "build\"
 
-echo ------------------------------------------
-if %errorlevel% equ 0 (
-    echo BUILD SUCCESSFUL!
-    echo Launching the Launcher now...
-    start build/Launcher.exe
-) else (
-    echo !! BUILD FAILED !! Check the errors above.
-    echo !! This is builded by LOM_Noob and Jurmat, Do not Republish this code gain in github. (Github: https://github.com/NoobRobloxdev/ )
+echo ---------------------------------------
+echo Coping Sounds/Textures to Build/Sounds Build/Textures
+xcopy /E /I /Y "Sounds" "build\Sounds"
+xcopy /E /I /Y "Textures" "build\Textures"
+echo ---------------------------------------
+
+echo Compiling Launcher (main.cpp)...
+g++ code/main.cpp -o build/Launcher.exe -std=c++17 -I include -L lib -lraylib -lopengl32 -lgdi32 -lwinmm -lshell32
+
+if %ERRORLEVEL% NEQ 0 (
+    echo [!] Launcher failed.
     pause
+    exit /b
 )
+
+echo Compiling Game (Game.cpp)...
+g++ code/Game.cpp -o build/Game.exe -std=c++17 -I include -L lib -lraylib -lopengl32 -lgdi32 -lwinmm
+
+echo Compiling Was (Was.cpp)...
+g++ code/babettasim.cpp -o build/babettasim.exe --std=c++17 -I include -L lib -lraylib -lopengl32 -lgdi32 -lwinmm -lshell32
+
+if %ERRORLEVEL% NEQ 0 (
+    echo [!] Game failed.
+    pause
+    exit /b
+)
+
+echo ---------------------------------------
+echo !! BUILD SUCCESSFUL !!
+echo Run build/Launcher.exe to start.
+echo ---------------------------------------
+pause

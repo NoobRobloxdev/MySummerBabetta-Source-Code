@@ -1,0 +1,64 @@
+============================================================
+           MY SUMMER BABETTA - Verzia 0.4.1A
+============================================================
+
+Vitajte v simulátore slovenskej legendy! Tento projekt je 3D hra 
+postavená na knižnici Raylib, kde môžete opravovať, jazdiť a 
+modovať svoju vlastnú Babettu.
+vytvorené podlá Jurmat, LOM_Noob, Katka Cista
+Ked je niekde problém, napíšte na tento Email: vondranoob233@gmail.com
+------------------------------------------------------------
+1. AKO SPUSTIŤ HRU
+------------------------------------------------------------
+Ak máte hotový skompilovaný súbor (Game.exe):
+1. Uistite sa, že v priečinku s hrou máte zložku "Sounds" 
+   so súborom "birds_background.mp3".
+2. Spustite "Game.exe".
+3. Ak používate mody, vložte .cfg alebo .txt súbory do zložky "mods".
+
+------------------------------------------------------------
+2. AKO ZMENIŤ KÓD A SKOMPILOVAŤ (Pre vývojárov)
+------------------------------------------------------------
+Na úpravu a spustenie hry z vlastných zdrojových kódov budete 
+potrebovať prostredie MSYS64 a kompilátor GCC.
+
+A. PRÍPRAVA PROSTREDIA:
+1. Nainštalujte MSYS64 (https://www.msys2.org/).
+2. Otvorte terminál "MSYS2 MinGW 64-bit" a nainštalujte GCC:
+   pacman -S mingw-w64-x86_64-gcc
+3. Stiahnite si vývojársku verziu knižnice Raylib pre MinGW.
+
+B. ÚPRAVA KÓDU:
+- Odporúčame použiť Visual Studio Code (VSC).
+- Nainštalujte si vo VSC rozšírenie "C/C++" od Microsoftu.
+- Súbor "Game.cpp" obsahuje hlavnú logiku hry.
+
+C. KOMPILÁCIA (Príkaz pre terminál):
+V priečinku s hrou spustite nasledujúci príkaz (uistite sa, že cesty 
+k Raylibu sú správne):
+
+g++ Game.cpp -o Game.exe -lraylib -lopengl32 -lgdi32 -lwinmm -lstatic
+
+------------------------------------------------------------
+3. OVLÁDANIE HRY
+------------------------------------------------------------
+- Pohyb postavy: W, A, S, D + Myš
+- Nastúpenie/Vystúpenie z Babetty: E
+- Interakcia (Rádio, Diely): Ľavé tlačidlo myši
+- Pauza: ESC
+- Zobraziť FPS: F6
+
+------------------------------------------------------------
+4. ODKAZ PRE DEVELOPERA (Ako prispieť)
+------------------------------------------------------------
+Ak chceš niečo dopísať do kódu alebo vytvoriť nový systém:
+1. Čitateľnosť: Komentuj nové funkcie, aby sme vedeli, čo robia.
+2. Kolízie: Ak pridávaš budovy, pridaj ich BoundingBox do 
+   funkcie IsPlayerColliding.
+3. Mod Systém: Ak pridávaš novú vlastnosť (napr. gravitáciu), 
+   dopíš jej čítanie do funkcie LoadAndApplyMods cez ifstream.
+4. Audio: Každý nový zvuk musí byť ošetrený podmienkou 
+   fs::exists, aby hra nespadla, ak súbor chýba.
+Ked je niekde problém, napíšte na tento Email: vondranoob233@gmail.com
+Vytvorené s vášňou pre staré stroje a dobrý kód!
+------------------------------------------------------------

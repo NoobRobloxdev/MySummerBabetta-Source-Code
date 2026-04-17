@@ -1,0 +1,49 @@
+============================================================
+       AKO VYTVORIŤ A PRIDAŤ MOD PRE BABETTU
+============================================================
+
+Tento systém umožňuje meniť parametre hry bez úpravy zdrojového kódu.
+Hra pri štarte automaticky číta všetky súbory v zložke "build/mods/".
+Mody boli pridane pre Testovanie ModLoaderú. Nakódované podlá LOM_Noob
+Ked je niekde problém, napíšte na tento Email: vondranoob233@gmail.com
+------------------------------------------------------------
+1. FORMÁT SÚBORU
+------------------------------------------------------------
+- Súbor musí mať príponu .txt alebo .cfg alebo len zo srandy .c a .dll
+- Každý príkaz musí byť na novom riadku.
+- Formát príkazu: názov_funkcie:hodnota
+
+------------------------------------------------------------
+2. DOSTUPNÉ PRÍKAZY (FUNKCIE)
+------------------------------------------------------------
+
+A) speed:[číslo]
+   - Mení rýchlosť zrýchlenia Babetty.
+   - Základná hodnota je 1.0.
+   - Príklad: speed:5.0 (Babetta bude 5x rýchlejšia)
+
+B) money:[číslo]
+   - Pridá peniaze hráčovi hneď pri štarte hry.
+   - Príklad: money:10000 (Dostaneš bonus 10 000 EUR)
+
+------------------------------------------------------------
+3. PRÍKLAD MODU (Návod)
+------------------------------------------------------------
+Ak chceš vytvoriť mod "SuperŠtart":
+1. V zložke "mods" vytvor súbor "superstart.txt".
+2. Do neho napíš:
+   speed:2.5
+   money:500
+3. Ulož súbor a zapni Game.exe.
+4. V hre uvidíš v pravom hornom rohu "MODS LOADED: 1".
+
+------------------------------------------------------------
+4. TIPY PRE TVORCOV
+------------------------------------------------------------
+- Nepoužívajte medzery pred názvom príkazu (píšte "speed:5", nie " speed:5").
+- Ak chcete mod vypnúť, stačí súbor zo zložky "mods" vymazať alebo presunúť inam.
+- Môžete mať viac modov naraz (napr. jeden na peniaze a druhý na rýchlosť).
+Ked je niekde problém, napíšte na tento Email: vondranoob233@gmail.com
+
+Vytvor niečo šialené! - Jurmat
+============================================================
