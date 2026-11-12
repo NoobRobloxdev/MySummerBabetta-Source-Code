@@ -2,7 +2,7 @@
 A rural Slovak simulator built with C++ and Raylib. Build, maintain, and ride your legendary Babetta through a village while managing your survival and money.
 
 [!CAUTION]
-COPYRIGHT NOTICE: This project is built by LOM_Noob and Jurmat also with Katka Cista. Do not republish this code on GitHub or any other platform.
+COPYRIGHT NOTICE: This project is built by LOM_Noob and Jurmat also with ??. Do not republish this code on GitHub or any other platform.
 🛑🛑🛑🛑
 🛑MODLOADER ADDED, Mods are in Mods (TESTING) Folder, to make a Mod for it, please read the txt HLAVNE_PRECITAT_PRE_DAVANIE_MODOV.txt (Its in slovak, english will be released soon)
 🛑PLEASE READ THE PRECITAJMA.txt (Its in slovak, english will be released soon)
