@@ -70,7 +70,7 @@ LOM_Noob - Lead Developer / Logic / Programming / no fucking ai.
 
 Jurmat - Co-Developer / Optimization / Textures / Actually a founder of the Idea lol -LOM_Noob
 
-Katka Cista - Ideas for Launcher and Game and Helper, (Its a girl) - LOM_Noob
+?? - Ideas for Launcher and Game and Helper, (Its a girl) - LOM_Noob
 
 
 
