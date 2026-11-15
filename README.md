@@ -40,7 +40,7 @@ F9	Cheat: Instant 999,999 EUR
 APR/17/2026
 THIS IS NEW: F12 SCREENSHOT!!! idk about that but yea - LOM_Noob
 🛑🛑🛑🛑
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 🏗 Technical Details
 Language: C++
@@ -71,6 +71,3 @@ LOM_Noob - Lead Developer / Logic / Programming / no fucking ai.
 Jurmat - Co-Developer / Optimization / Textures / Actually a founder of the Idea lol -LOM_Noob
 
 ?? - Ideas for Launcher and Game and Helper, (Its a girl) - LOM_Noob
-
-
-
