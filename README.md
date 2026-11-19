@@ -1,4 +1,4 @@
-# 🛵 My Summer Babetta (ALPHA) - v0.4.8ADEV1
+# 🛵 My Summer Babetta (ALPHA) - v0.4.8ADEV2
 
 A rural Slovak simulator built with C++ and Raylib. Build, maintain, tune and ride your legendary Babetta through a village while managing your survival and money.
 
