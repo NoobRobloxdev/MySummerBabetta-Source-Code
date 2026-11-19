@@ -1,0 +1,43 @@
+============================================================
+           MY SUMMER BABETTA - Verzia 0.4.8DEV
+============================================================
+
+Vitajte v simulátore slovenskej legendy! Tento projekt je 3D hra 
+postavená na knižnici Raylib, kde môžete opravovať, jazdiť a 
+modovať svoju vlastnú Babettu.
+Vytvorené podlá Jurmat, LOM_Noob, Katka Cista
+Ked je niekde problém, napíšte na tento Email: vondranoob233@gmail.com
+------------------------------------------------------------
+1. AKO SPUSTIŤ HRU
+------------------------------------------------------------
+Ak máte hotový skompilovaný súbor (Game.exe):
+1. Uistite sa, že v priečinku s hrou máte zložku "Sounds" 
+   so súborom "birds_background.mp3".
+2. Spustite "Launcher.exe" alebo "Game.exe".
+3. Ak používate mody, vložte .cfg alebo .txt súbory do zložky "mods".
+
+------------------------------------------------------------
+2. NOVINKY VO VERZII 0.4.8DEV
+------------------------------------------------------------
+- Pohľad prvej osoby (First Person) s modelom rúk a riadidiel
+- Kompletný 3D model hráča (možnosť prepnúť pohľad klávesom [V])
+- Nová Čerpacia Stanica (Benzinol) s funkčným tankovaním MIX 2T
+- Nové ulice, križovatka a cestná sieť
+- Vylepšený a štýlový MOTO-TUNING SHOP s predavačom Jožom a dielmi
+- Farma mimo cesty: naložte 20 PSENICA a predajte ich za 200 EUR
+- ModLoader 0.1.8ADEV: FAST_GROW alebo WHEAT_REGROW_TIME pre rast PSENICA
+
+------------------------------------------------------------
+3. OVLÁDANIE HRY
+------------------------------------------------------------
+- Pohyb postavy: W, A, S, D + Myš
+- Nastúpenie / Vystúpenie z Babetty: E
+- Prepínanie pohľadu (1. osoba / 3. osoba): V
+- Interakcia (Rádio, Diely, Tankovanie): Ľavé tlačidlo myši
+- Otvorenie MOTO-SHOPU pri predajni: F (alebo kliknutie)
+- Tankovanie na čerpacej stanici: F alebo LMB pri stojane
+- Jazda na Babette: W - Plyn, S - Brzda / Cúvanie, A, D - Zatáčanie s náklonom
+- Pauza: ESC
+- Zobraziť FPS: F6
+- Cheat Peniaze: F9
+------------------------------------------------------------
