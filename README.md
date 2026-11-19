@@ -157,4 +157,4 @@ If you can't find it, create a bug report or contact: vondranoob233@gmail.com
 ## 🤝 Credits
 - **LOM_Noob** - Lead Developer / Logic / Programming / no fucking ai.
 - **Jurmat** - Co-Developer / Optimization / Textures / Actually a founder of the Idea lol - LOM_Noob
-- **??** - Ideas for Launcher and Game and Helper (It's a girl) - LOM_Noob
+- **DJ Mnauko** - Sound Effects / Music - in 0.4.8DEV4 will be music and sound effects
