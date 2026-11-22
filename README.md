@@ -99,7 +99,7 @@ Work at the repair counter and play the 2D minigame **"Assemble the Babetta"**:
 | `ESC` | Toggle Pause Menu / Show Cursor |
 | `F6` | Toggle FPS Counter |
 | `F9` | Cheat: Instant 999,999 EUR |
-| `F12` | **NEW:** Screenshot (APR/17/2026) |
+| `F12` | Screenshot |
 
 ---
 
