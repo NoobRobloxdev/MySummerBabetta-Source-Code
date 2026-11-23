@@ -188,15 +188,15 @@ If you can't find it, create a bug report or contact: [vondranoob233@gmail.com](
 
 ### ✅ Short-term (v0.4.8 → v0.5)
 
-- [ ] Bake roadside trees into a mesh (more FPS, same technique as the wheat).
-- [ ] Custom mechanic model (currently uses the shopkeeper model).
-- [ ] Food as a temporary buff (e.g. goulash = temporary speed boost).
-- [ ] Sounds for buying, eating and finishing jobs.
-- [ ] Unify max-speed calculation in one place (currently duplicated 3x).
-- [ ] Custom 3D shop name signs (currently only colored stripes).
-- [ ] English translation of `HLAVNE_PRECITAT_PRE_DAVANIE_MODOV.txt` and `PRECITAJMA.txt`.
-- [ ] Fix survival mechanics (Hunger/Thirst still buggy).
-- [ ] Music & sound effects (planned for v0.4.8DEV4 by DJ Mnauko).
+- [🚀] Bake roadside trees into a mesh (more FPS, same technique as the wheat).
+- [🚀] Custom mechanic model (currently uses the shopkeeper model).
+- [💭] Food as a temporary buff (e.g. goulash = temporary speed boost).
+- [🚀] Sounds for buying, eating and finishing jobs.
+- [🚀] Unify max-speed calculation in one place (currently duplicated 3x).
+- [🚀] Custom 3D shop name signs (currently only colored stripes).
+- [✅] English translation of `HLAVNE_PRECITAT_PRE_DAVANIE_MODOV.txt` and `PRECITAJMA.txt`.
+- [🚧] Fix survival mechanics (Hunger/Thirst still buggy).
+- [🚧] Music & sound effects (planned for v0.4.8DEV4 by DJ Mnauko).
 
 ### 🚧 In Progress
 
