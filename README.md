@@ -202,7 +202,6 @@ If you can't find it, create a bug report or contact: [vondranoob233@gmail.com](
 
 - [ ] **Android application** — mobile port with touch controls and virtual joystick.
 - [ ] **Expanding the modloader** — scripted mods, custom vehicles, custom maps.
-- [ ] **Server maps & direct IP** — dedicated server maps and direct IP connect.
 
 ---
 
