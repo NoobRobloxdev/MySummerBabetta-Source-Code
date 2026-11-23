@@ -6,7 +6,7 @@ A rural Slovak simulator built with C++ and Raylib. Build, maintain, tune and ri
 > **COPYRIGHT NOTICE:** This project is built by **LOM_Noob** and **Jurmat**, also with **DJ Mnauko**. Do not republish this code on GitHub or any other platform.
 
 > [!IMPORTANT]
-> 🛑 **MODLOADER ADDED.** Mods go into the `/build/mods` folder. To make a mod, read `HLAVNE_PRECITAT_PRE_DAVANIE_MODOV.txt` (in Slovak, English will be released soon).
+> 🛑 **MODLOADER ADDED.** Mods go into the `/build/mods` folder. To make a mod, read `PRECITAJ_PRE_MODY.txt` (in Slovak, English will be released soon).
 >
 > 🛑 **PLEASE READ** `PRECITAJMA.txt` (in Slovak, English will be released soon).
 
